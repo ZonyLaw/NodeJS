@@ -1,11 +1,20 @@
 const path = require("path");
 const express = require("express");
 const bodyParser = require("body-parser");
+const exphbs = require("express-handlebars");
+
+const hbs = exphbs.create({
+  layoutsDir: "views/layouts/",
+  defaultLayout: "main-layout",
+  extname: ".hbs",
+});
 
 const app = express();
 
+app.engine("hbs", hbs.engine);
+
 // by default in pugs it looks into the views folder for the html but here we define the views, views just for illustartion
-app.set("view engine", "pug");
+app.set("view engine", "hbs");
 app.set("views", "views");
 
 const adminData = require("./routes/admin");
