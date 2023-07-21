@@ -50,3 +50,5 @@ exports.getProducts = (req, res, next) => {
     });
   });
 };
+
+exports.postEditProduct = (req, res, next) => {};
