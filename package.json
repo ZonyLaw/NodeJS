@@ -17,6 +17,7 @@
     "glob-parent": "^5.1.2",
     "got": "^11.8.5",
     "handlebars": "^4.7.7",
+    "mysql2": "^3.5.2",
     "nodemon": "^3.0.1",
     "pug": "^3.0.2",
     "semver": "^7.5.4"
