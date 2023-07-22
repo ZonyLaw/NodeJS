@@ -39,7 +39,6 @@ exports.getCart = (req, res, next) => {
       const cartProducts = [];
 
       for (product of products) {
-        console.log(product);
         const cartProductData = cart.products.find(
           (prod) => prod.id === product.id
         );
@@ -67,6 +66,7 @@ exports.postCart = (req, res, next) => {
 
 exports.postCartDeleteProduct = (req, res, next) => {
   const prodId = req.body.productId;
+  console.log("hello", prodId);
   Product.findById(prodId, (product) => {
     Cart.deleteProduct(prodId, product.price);
     res.redirect("/cart");
