@@ -110,3 +110,11 @@ main {
 .centered {
   text-align: center;
 }
+
+.image {
+  height: 10rem;
+}
+
+.image img {
+  height: 100%;
+}
