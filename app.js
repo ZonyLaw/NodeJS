@@ -24,7 +24,7 @@ app.use((req, res, next) => {
       req.user = user;
       next();
     })
-    .cathc((err) => console.log(err));
+    .catch((err) => console.log(err));
 });
 
 app.use("/admin", adminRoutes);
