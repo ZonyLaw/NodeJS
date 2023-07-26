@@ -43,7 +43,7 @@ Product.belongsToMany(Cart, { through: CartItem });
 
 // by applying force: true we redo the tables
 sequelize
-  .sync({ force: true })
+  .sync()
   .then((results) => {
     return User.findByPk(1);
     // console.log(results);
@@ -56,6 +56,9 @@ sequelize
   })
   .then((user) => {
     console.log(user);
+    user.createCart();
+  })
+  .then((cart) => {
     app.listen(3000);
   })
   .catch((err) => {
