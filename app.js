@@ -52,7 +52,7 @@ sequelize
     if (!user) {
       return User.create({ name: "Max", email: "sunny_law@hotmail.com" });
     }
-    return Promise.resolve(user);
+    return user;
   })
   .then((user) => {
     console.log(user);
