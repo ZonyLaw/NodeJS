@@ -16,6 +16,7 @@ exports.postAddProduct = (req, res, next) => {
   const price = req.body.price;
   const description = req.body.description;
   const product = new Product(null, title, imageUrl, price, description);
+<<<<<<< HEAD
 
   req.user
     .createProduct({
@@ -27,6 +28,12 @@ exports.postAddProduct = (req, res, next) => {
     .then((results) => {
       res.redirect("/admin/products");
       console.log("created product!");
+=======
+  product
+    .save()
+    .then(() => {
+      res.redirect("/");
+>>>>>>> parent of edda5e3 (use sequelize create function to create product2)
     })
     .catch((err) => console.log(err));
 };
