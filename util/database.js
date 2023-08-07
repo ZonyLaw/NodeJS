@@ -1,5 +1,7 @@
 const mongodb = require("mongodb");
 const MongoClient = mongodb.MongoClient;
+let _db;
+
 require("dotenv").config();
 
 const mongoConnect = (callback) => {
@@ -7,15 +9,26 @@ const mongoConnect = (callback) => {
     `mongodb+srv://Sunny:${process.env.DB_PASSWORD}@cluster0.ars0ie4.mongodb.net/?retryWrites=true&w=majority`
   )
     .then((client) => {
-      console.log("connected");
-      console.log(client);
+      console.log("Connected!");
+      _db = client.db();
+      callback();
     })
     .catch((err) => {
       console.log(err);
+      throw err;
     });
 };
 
-module.exports = mongoConnect;
+const getDb = () => {
+  if (_db) {
+    return _db;
+  }
+  throw "No database found!";
+};
+
+exports.mongoConnect = mongoConnect;
+exports.getDb = getDb;
+
 // const Sequelize = require("sequelize");
 
 // const sequelize = new Sequelize(
