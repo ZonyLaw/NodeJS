@@ -31,7 +31,7 @@
                             <% if (editing) { %> <%= product.description %> <% } %></textarea>
                     </div>
                     <% if (editing) { %>
-                        <input type="hidden" value="<%= product.id %>" name="productId">
+                        <input type="hidden" value="<%= product._id %>" name="productId">
                         <% } %>
 
                             <button type="submit">
