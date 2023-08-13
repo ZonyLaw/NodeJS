@@ -6,7 +6,7 @@ require("dotenv").config();
 
 const mongoConnect = (callback) => {
   MongoClient.connect(
-    `mongodb+srv://Sunny:${process.env.DB_PASSWORD}@cluster0.ars0ie4.mongodb.net/?retryWrites=true&w=majority`
+    `mongodb+srv://Sunny:${process.env.DB_PASSWORD}@cluster0.ars0ie4.mongodb.net/shop?retryWrites=true&w=majority`
     // `mongodb://Sunny:${process.env.DB_PASSWORD}@192.168.169.241/products`
   )
     .then((client) => {
