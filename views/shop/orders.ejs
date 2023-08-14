@@ -7,18 +7,18 @@
             <main>
                 <% if(orders.length <=0) { %>
 
-
+                    <h1>No orders!</h1>
                     <% } else { %>
                         <ul>
                             <% orders.forEach(order=> {%>
 
                                 <h1>
-                                    #<%= order.id %>
+                                    #<%= order._id %>
                                 </h1>
 
-                                <% order.products.forEach (product=>{ %>
+                                <% order.items.forEach (product=>{ %>
                                     <li>
-                                        <%= product.title %> (<%= product.orderItem.quantity %>)
+                                        <%= product.title %> (<%= product.quantity %>)
                                     </li>
                                     <% }); %>
 
@@ -30,7 +30,7 @@
 
 
 
-                            <h1>Nothing there!</h1>
+
 
             </main>
 

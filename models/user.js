@@ -1,5 +1,5 @@
-const { getDb } = require("../util/database");
-const mongodb = require("mongodb");
+const { getDb } = require('../util/database');
+const mongodb = require('mongodb');
 // const db = require("../util/database").getDb;
 
 const ObjectId = mongodb.ObjectId;
@@ -15,7 +15,7 @@ class User {
   save() {
     const db = getDb();
     return db
-      .collection("users")
+      .collection('users')
       .insertOne(this)
       .then()
       .catch((err) => {
@@ -46,7 +46,7 @@ class User {
     };
     const db = getDb();
     return db
-      .collection("users")
+      .collection('users')
       .updateOne(
         { _id: new ObjectId(this._id) },
         { $set: { cart: updatedCart } }
@@ -60,7 +60,7 @@ class User {
     });
 
     return db
-      .collection("products")
+      .collection('products')
       .find({ _id: { $in: productIds } })
       .toArray()
       .then((products) => {
@@ -82,7 +82,7 @@ class User {
 
     const db = getDb();
     return db
-      .collection("users")
+      .collection('users')
       .updateOne(
         { _id: new ObjectId(this._id) },
         { $set: { cart: { items: updatedCartItems } } }
@@ -101,13 +101,13 @@ class User {
           },
         };
 
-        return db.collection("order").insertOne(order);
+        return db.collection('orders').insertOne(order);
       })
       .then((result) => {
         this.cart = { item: [] };
 
         return db
-          .collection("users")
+          .collection('users')
           .updateOne(
             { _id: new ObjectId(this._id) },
             { $set: { cart: { items: [] } } }
@@ -117,13 +117,25 @@ class User {
 
   getOrders() {
     const db = getDb();
-    // return db.collection('orders').findById
+    return db
+      .collection('orders')
+      .find({ 'user._id': new ObjectId(this._id) })
+      .toArray()
+      .then((ordersArray) => {
+        console.log('user._id:', new ObjectId(this._id)); // Log the value of user._id
+        console.log('Orders array:', ordersArray); // Log the orders array
+        return ordersArray;
+      })
+      .catch((error) => {
+        console.error('Error retrieving orders:', error);
+        throw error;
+      });
   }
 
   static findById(userId) {
     const db = getDb();
     return db
-      .collection("users")
+      .collection('users')
       .findOne({ _id: new ObjectId(userId) })
       .then()
       .catch((err) => {
