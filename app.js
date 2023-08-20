@@ -37,9 +37,10 @@ app.use(errorController.get404);
 
 mongoose
   .connect(
-    `mongodb+srv://Sunny:${process.env.DB_PASSWORD}@cluster0.ars0ie4.mongodb.net/?retryWrites=true&w=majority`
+    `mongodb+srv://Sunny:${process.env.DB_PASSWORD}@cluster0.ars0ie4.mongodb.net/shop?retryWrites=true&w=majority`
   )
   .then((result) => {
+    console.log('Connected!');
     app.listen(3000);
   })
   .catch((err) => {
