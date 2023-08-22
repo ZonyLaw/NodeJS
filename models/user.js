@@ -18,6 +18,7 @@ const userSchema = new Schema({
         productId: {
           type: Schema.Types.ObjectId,
           ref: 'Product',
+          // autopopulate: true,
           required: true,
         },
         quantity: {
@@ -54,6 +55,7 @@ userSchema.methods.addToCart = function (product) {
   return this.save();
 };
 
+// userSchema.plugin(require('mongoose-autopopulate'));
 module.exports = mongoose.model('User', userSchema);
 
 // const mongodb = require('mongodb');

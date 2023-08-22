@@ -20,6 +20,7 @@
     "handlebars": "^4.7.7",
     "mongodb": "^5.7.0",
     "mongoose": "^7.4.3",
+    "mongoose-autopopulate": "^1.0.1",
     "mysql2": "^3.5.2",
     "nodemon": "^3.0.1",
     "pug": "^3.0.2",
