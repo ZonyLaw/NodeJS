@@ -63,6 +63,11 @@ userSchema.methods.removeFromCart = function (productId) {
   return this.save();
 };
 
+userSchema.methods.clearCart = function () {
+  this.cart = { items: [] };
+  return this.save();
+};
+
 // userSchema.plugin(require('mongoose-autopopulate'));
 module.exports = mongoose.model('User', userSchema);
 
