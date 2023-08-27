@@ -63,19 +63,6 @@ mongoose
     // `mongodb+srv://Sunny:${process.env.DB_PASSWORD}@cluster0.ars0ie4.mongodb.net/shop?retryWrites=true&w=majority`
   )
   .then((result) => {
-    User.findOne().then((user) => {
-      if (!user) {
-        const user = new User({
-          name: 'Max',
-          email: 'max@test.com',
-          cart: {
-            items: [],
-          },
-        });
-        user.save();
-      }
-    });
-    console.log('Connected!');
     app.listen(3000);
   })
   .catch((err) => {
