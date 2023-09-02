@@ -9,7 +9,7 @@ exports.getLogin = (req, res, next) => {
   res.render('auth/login', {
     path: '/login',
     pageTitle: 'Login',
-    isAuthenticated: false,
+    errorMessage: req.flash('error'),
   });
 };
 
@@ -17,7 +17,6 @@ exports.getSignup = (req, res, next) => {
   res.render('auth/signup', {
     path: '/signup',
     pageTitle: 'Signup',
-    isAuthenticated: false,
   });
 };
 
@@ -27,9 +26,8 @@ exports.postLogin = (req, res, next) => {
 
   User.findOne({ email: email })
     .then((user) => {
-      console.log('beginning', password);
-      console.log(user.password);
       if (!user) {
+        req.flash('error', 'Invalid email or password.');
         console.log('no user');
         return res.redirect('/login');
       }
