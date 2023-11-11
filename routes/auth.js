@@ -10,7 +10,18 @@ router.get('/login', authController.getLogin);
 
 router.get('/signup', authController.getSignup);
 
-router.post('/login', authController.postLogin);
+router.post(
+  '/login',
+  [
+    (body('email')
+      .isEmail()
+      .withMessage('Please enter valid email address.')
+      .normalizeEmail(),
+    body('password').isLength().isAlphanumeric().trim()),
+  ],
+
+  authController.postLogin
+);
 
 router.post('/logout', authController.postLogout);
 
@@ -30,19 +41,23 @@ router.post(
             return Promise.reject('Email already exist!');
           }
         });
-      }),
+      })
+      .normalizeEmail(),
     body(
       'password',
       'Please enter a password with numbers and alphabets at least 5 characters'
     )
       .isLength({ min: 5 })
-      .isAlphanumeric(),
-    body('confirmPassword').custom((value, { req }) => {
-      if (value !== req.body.password) {
-        throw new Error('Passwords have to match!');
-      }
-      return true;
-    }),
+      .isAlphanumeric()
+      .trim(),
+    body('confirmPassword')
+      .custom((value, { req }) => {
+        if (value !== req.body.password) {
+          throw new Error('Passwords have to match!');
+        }
+        return true;
+      })
+      .trim(),
   ],
   authController.postSignup
 );
